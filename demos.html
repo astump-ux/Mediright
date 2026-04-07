@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRight – Product Demos</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f172a; --navy-mid: #1e293b;
+      --mint: #10b981; --mint-dark: #059669; --mint-light: #d1fae5;
+      --gray-100: #f1f5f9; --gray-200: #e2e8f0; --gray-400: #94a3b8; --gray-600: #475569;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 16px; --radius-lg: 24px;
+      --shadow: 0 4px 24px rgba(15,23,42,.10);
+    }
+    body { font-family: var(--font-sans); background: var(--gray-100); color: var(--navy); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+
+    header { background: var(--navy); padding: 0; }
+    .header-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 1.3rem; color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); display: inline-block; }
+    .back-link { font-size: .82rem; color: rgba(255,255,255,.5); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .15s; }
+    .back-link:hover { color: rgba(255,255,255,.85); }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 56px 24px 80px; flex: 1; }
+
+    .hero { text-align: center; margin-bottom: 52px; }
+    .hero-eyebrow { font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--mint-dark); margin-bottom: 14px; }
+    .hero-title { font-family: var(--font-serif); font-size: 2.4rem; color: var(--navy); line-height: 1.15; margin-bottom: 14px; }
+    .hero-sub { font-size: 1rem; color: var(--gray-600); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .demo-card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; border: 1.5px solid transparent; }
+    .demo-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(15,23,42,.14); border-color: var(--mint); }
+
+    .demo-card-visual { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+    .demo-card-visual.blue-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); }
+    .demo-card-visual.navy-bg { background: linear-gradient(135deg, #0f172a 0%, #1a2744 100%); }
+    .visual-icon { position: relative; z-index: 1; }
+    .visual-circles { position: absolute; inset: 0; overflow: hidden; }
+    .vc { position: absolute; border-radius: 50%; border: 1px solid rgba(16,185,129,.15); }
+
+    .demo-card-body { padding: 24px 28px 28px; flex: 1; display: flex; flex-direction: column; }
+    .demo-tag { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 3px 10px; border-radius: 100px; margin-bottom: 12px; align-self: flex-start; }
+    .tag-single { background: var(--mint-light); color: var(--mint-dark); }
+    .tag-full { background: #eff6ff; color: #1d4ed8; }
+    .demo-title { font-family: var(--font-serif); font-size: 1.35rem; color: var(--navy); margin-bottom: 8px; line-height: 1.25; }
+    .demo-desc { font-size: .88rem; color: var(--gray-600); line-height: 1.65; flex: 1; margin-bottom: 20px; }
+    .demo-features { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-bottom: 22px; }
+    .demo-features li { font-size: .82rem; color: var(--gray-600); display: flex; align-items: flex-start; gap: 8px; }
+    .demo-features li i { color: var(--mint-dark); font-size: .75rem; margin-top: 3px; flex-shrink: 0; }
+    .demo-cta { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: .9rem; color: var(--mint-dark); margin-top: auto; }
+    .demo-cta i { font-size: .8rem; transition: transform .15s; }
+    .demo-card:hover .demo-cta i { transform: translateX(4px); }
+
+    .divider-note { text-align: center; margin: 40px 0 0; font-size: .82rem; color: var(--gray-400); display: flex; align-items: center; gap: 14px; }
+    .divider-note::before, .divider-note::after { content:''; flex:1; height:1px; background:var(--gray-200); }
+
+    @media (max-width: 600px) {
+      .demo-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">MediRight<span class="logo-dot"></span></a>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Zurück zur Landing Page</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-eyebrow"><i class="fa-solid fa-flask" style="margin-right:5px"></i>Product Demos</div>
+    <div class="hero-title">So sieht MediRight<br>in der Praxis aus</div>
+    <div class="hero-sub">Zwei interaktive Mockups — von der Einzelrechnung bis zum vollständigen Jahres-Dashboard.</div>
+  </div>
+
+  <div class="demo-grid">
+
+    <!-- Demo 1: Einzelanalyse -->
+    <a href="mediright_analyse_demo.html" class="demo-card">
+      <div class="demo-card-visual blue-bg">
+        <div class="visual-circles">
+          <div class="vc" style="width:200px;height:200px;top:-60px;right:-40px;"></div>
+          <div class="vc" style="width:120px;height:120px;bottom:-30px;left:20px;"></div>
+        </div>
+        <div class="visual-icon">
+          <i class="fa-solid fa-file-medical" style="color:var(--mint); filter:drop-shadow(0 0 20px rgba(16,185,129,.4))"></i>
+        </div>
+      </div>
+      <div class="demo-card-body">
+        <span class="demo-tag tag-single"><i class="fa-solid fa-magnifying-glass"></i> Einzelrechnung</span>
+        <div class="demo-title">Analyse-Report</div>
+        <div class="demo-desc">Was passiert, wenn ein Nutzer seine erste Arztrechnung über WhatsApp einreicht — die Analyse, die er innerhalb von Sekunden zurückbekommt.</div>
+        <ul class="demo-features">
+          <li><i class="fa-solid fa-check"></i> GOÄ-Positionen mit Faktor-Ampel</li>
+          <li><i class="fa-solid fa-check"></i> §12-Verstoß-Erkennung mit Einsparbetrag</li>
+          <li><i class="fa-solid fa-check"></i> Benchmark vs. Fachgruppen-Durchschnitt</li>
+          <li><i class="fa-solid fa-check"></i> Premium-Upsell: Widerspruchsbrief-Preview</li>
+        </ul>
+        <div class="demo-cta">Analyse öffnen <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+    </a>
+
+    <!-- Demo 2: Dashboard -->
+    <a href="mediright_dashboard.html" class="demo-card">
+      <div class="demo-card-visual navy-bg">
+        <div class="visual-circles">
+          <div class="vc" style="width:220px;height:220px;top:-70px;left:-50px;"></div>
+          <div class="vc" style="width:100px;height:100px;bottom:-20px;right:30px;"></div>
+        </div>
+        <div class="visual-icon">
+          <i class="fa-solid fa-chart-line" style="color:var(--mint); filter:drop-shadow(0 0 20px rgba(16,185,129,.4))"></i>
+        </div>
+      </div>
+      <div class="demo-card-body">
+        <span class="demo-tag tag-full"><i class="fa-solid fa-table-columns"></i> Vollständig</span>
+        <div class="demo-title">Nutzer-Dashboard</div>
+        <div class="demo-desc">Das vollständige Jahres-Dashboard nach mehreren eingereichten Vorgängen — mit allen Mehrwert-Layers die Retention und Viralität erzeugen.</div>
+        <ul class="demo-features">
+          <li><i class="fa-solid fa-check"></i> Arzt-Faktorverlauf über mehrere Besuche</li>
+          <li><i class="fa-solid fa-check"></i> AXA Ablehnungsrate vs. Kundendurchschnitt</li>
+          <li><i class="fa-solid fa-check"></i> Stille Kürzung kumuliert</li>
+          <li><i class="fa-solid fa-check"></i> Gesundheitschronik &amp; Vorsorge-Erinnerungen</li>
+        </ul>
+        <div class="demo-cta">Dashboard öffnen <i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="divider-note">Interne Demo-Seite · Nicht verlinkt von der Landing Page</div>
+
+</div>
+
+</body>
+</html>
