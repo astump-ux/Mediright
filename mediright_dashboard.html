@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRight – Mein Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f172a; --navy-mid: #1e293b; --navy-light: #334155;
+      --mint: #10b981; --mint-dark: #059669; --mint-light: #d1fae5;
+      --amber: #f59e0b; --amber-light: #fef3c7;
+      --red: #ef4444; --red-light: #fee2e2;
+      --purple: #8b5cf6; --purple-light: #ede9fe;
+      --blue: #3b82f6; --blue-light: #eff6ff;
+      --white: #ffffff;
+      --gray-50: #f8fafc; --gray-100: #f1f5f9; --gray-200: #e2e8f0;
+      --gray-400: #94a3b8; --gray-600: #475569; --text: #0f172a;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(15,23,42,.07);
+      --shadow-md: 0 4px 16px rgba(15,23,42,.10);
+      --shadow-lg: 0 20px 40px rgba(15,23,42,.14);
+      --radius: 14px; --radius-sm: 8px; --radius-lg: 22px;
+    }
+    body { font-family: var(--font-sans); color: var(--text); background: var(--gray-100); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* ── HEADER ── */
+    header { background: var(--navy); padding: 0; position: sticky; top: 0; z-index: 100; }
+    .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-serif); font-size: 1.3rem; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); display: inline-block; }
+    .header-nav { display: flex; gap: 4px; }
+    .nav-item { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.5); padding: 6px 16px; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all .15s; }
+    .nav-item.active { background: rgba(255,255,255,.1); color: var(--white); }
+    .nav-item:hover:not(.active) { color: rgba(255,255,255,.8); }
+    .header-user { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: rgba(255,255,255,.6); }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--mint-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .8rem; color: white; }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 28px 24px 80px; }
+
+    /* ── GREETING BAR ── */
+    .greeting-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .greeting-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--navy); }
+    .greeting-title span { color: var(--mint-dark); }
+    .greeting-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+    .meta-pill { font-size: .78rem; background: var(--white); color: var(--gray-600); padding: 5px 14px; border-radius: 100px; box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 6px; }
+    .meta-pill i { color: var(--gray-400); }
+    .meta-pill.active-pill { background: var(--blue-light); color: #1d4ed8; }
+    .meta-pill.active-pill i { color: #3b82f6; }
+
+    /* ── KPI GRID ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+    .kpi-card { background: var(--white); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow-sm); }
+    .kpi-card.dark { background: var(--navy); }
+    .kpi-card.alert { background: #fffbeb; border: 1px solid #fde68a; }
+    .kpi-eyebrow { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-400); margin-bottom: 8px; }
+    .kpi-card.dark .kpi-eyebrow { color: rgba(255,255,255,.45); }
+    .kpi-card.alert .kpi-eyebrow { color: #92400e; }
+    .kpi-num { font-family: var(--font-serif); font-size: 2rem; font-style: italic; color: var(--navy); line-height: 1; margin-bottom: 5px; }
+    .kpi-card.dark .kpi-num { color: var(--mint); }
+    .kpi-card.alert .kpi-num { color: #b45309; }
+    .kpi-sub { font-size: .78rem; color: var(--gray-600); display: flex; align-items: center; gap: 5px; }
+    .kpi-card.dark .kpi-sub { color: rgba(255,255,255,.45); }
+    .kpi-card.alert .kpi-sub { color: #92400e; }
+    .kpi-delta { font-size: .72rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
+    .delta-up { background: var(--red-light); color: #b91c1c; }
+    .delta-down { background: var(--mint-light); color: var(--mint-dark); }
+    .delta-neutral { background: var(--gray-100); color: var(--gray-600); }
+
+    /* ── PROGNOSE BANNER ── */
+    .prognose-banner { background: linear-gradient(135deg, var(--navy-mid) 0%, #1a2744 100%); border-radius: var(--radius); padding: 18px 24px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .prognose-left { display: flex; align-items: center; gap: 14px; }
+    .prognose-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.25); display: flex; align-items: center; justify-content: center; color: var(--mint); font-size: 1rem; flex-shrink: 0; }
+    .prognose-text { font-size: .9rem; color: rgba(255,255,255,.7); }
+    .prognose-text strong { color: white; font-size: 1rem; }
+    .prognose-amount { font-family: var(--font-serif); font-size: 1.6rem; font-style: italic; color: var(--mint); white-space: nowrap; }
+    .prognose-amount span { font-family: var(--font-sans); font-size: .75rem; font-style: normal; color: rgba(255,255,255,.4); display: block; text-align: right; margin-top: 2px; }
+
+    /* ── SECTION HEADS ── */
+    .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; margin-top: 32px; }
+    .section-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+    .section-title i { font-size: .95rem; }
+    .section-badge { font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: .07em; }
+    .badge-red { background: var(--red-light); color: #b91c1c; }
+    .badge-amber { background: var(--amber-light); color: #92400e; }
+    .badge-green { background: var(--mint-light); color: var(--mint-dark); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-600); }
+
+    /* ── CARDS ── */
+    .card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 24px 28px; margin-bottom: 16px; }
+    .card.flagged { border-left: 4px solid var(--amber); }
+    .card.flagged-red { border-left: 4px solid var(--red); }
+    .card.ok { border-left: 4px solid var(--mint); }
+
+    /* ── TWO-COL ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+    /* ── ARZT CARD ── */
+    .arzt-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; gap: 12px; }
+    .arzt-name { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 3px; }
+    .arzt-sub { font-size: .8rem; color: var(--gray-600); }
+    .arzt-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .arzt-stat { text-align: right; }
+    .arzt-stat-num { font-family: var(--font-serif); font-size: 1.4rem; font-style: italic; color: var(--navy); }
+    .arzt-stat-label { font-size: .72rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── FAKTOR-VERLAUF ── */
+    .faktor-verlauf { margin-bottom: 18px; }
+    .faktor-verlauf-title { font-size: .78rem; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 12px; }
+    .faktor-chart { display: flex; align-items: flex-end; gap: 10px; height: 70px; }
+    .faktor-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .faktor-bar-outer { width: 100%; background: var(--gray-100); border-radius: 4px 4px 0 0; position: relative; height: 50px; display: flex; align-items: flex-end; }
+    .faktor-bar-inner { width: 100%; border-radius: 4px 4px 0 0; transition: height .3s; }
+    .faktor-bar-label { font-size: .72rem; font-weight: 700; color: var(--navy); }
+    .faktor-bar-date { font-size: .68rem; color: var(--gray-400); }
+    .faktor-threshold { position: absolute; left: 0; right: 0; border-top: 1.5px dashed #94a3b8; }
+    .faktor-legend { display: flex; gap: 16px; margin-top: 8px; font-size: .72rem; color: var(--gray-600); }
+    .faktor-legend span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── ALERT BOX ── */
+    .alert-box { border-radius: var(--radius-sm); padding: 12px 16px; font-size: .83rem; margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+    .alert-box i { font-size: .9rem; margin-top: 2px; flex-shrink: 0; }
+    .alert-amber { background: var(--amber-light); border: 1px solid #fde68a; color: #92400e; }
+    .alert-red { background: var(--red-light); border: 1px solid #fca5a5; color: #991b1b; }
+    .alert-mint { background: var(--mint-light); border: 1px solid #6ee7b7; color: var(--mint-dark); }
+    .alert-blue { background: var(--blue-light); border: 1px solid #bfdbfe; color: #1e40af; }
+    .alert-box strong { font-weight: 700; display: block; margin-bottom: 2px; }
+    .alert-box .alert-action { margin-top: 6px; font-size: .78rem; font-weight: 700; color: inherit; text-decoration: underline; cursor: pointer; }
+
+    /* ── TIMELINE CHART (SVG) ── */
+    .svg-chart-wrap { margin: 8px 0 16px; }
+    .chart-title { font-size: .78rem; font-weight: 600; color: var(--gray-600); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 10px; }
+    .chart-labels { display: flex; justify-content: space-between; font-size: .68rem; color: var(--gray-400); margin-top: 6px; }
+
+    /* ── BENCHMARK ── */
+    .bench-row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+    .bench-row:last-child { border-bottom: none; }
+    .bench-left { }
+    .bench-label-main { font-weight: 600; font-size: .88rem; color: var(--navy); margin-bottom: 4px; }
+    .bench-sub-text { font-size: .78rem; color: var(--gray-400); }
+    .bench-bar-container { height: 8px; background: var(--gray-100); border-radius: 100px; margin-top: 8px; position: relative; overflow: hidden; }
+    .bench-fill-avg { position: absolute; left: 0; top: 0; height: 100%; background: var(--gray-200); border-radius: 100px; }
+    .bench-fill-you { position: absolute; left: 0; top: 0; height: 100%; border-radius: 100px; }
+    .fill-good { background: var(--mint); }
+    .fill-warn { background: var(--amber); }
+    .fill-bad { background: var(--red); }
+    .bench-values { text-align: right; }
+    .bench-you-val { font-weight: 700; font-size: .95rem; color: var(--navy); }
+    .bench-avg-val { font-size: .75rem; color: var(--gray-400); }
+
+    /* ── AUSGABEN CHART ── */
+    .ausgaben-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+    .ausgaben-row:last-child { border-bottom: none; }
+    .ausgaben-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+    .ausgaben-label { flex: 1; min-width: 0; }
+    .ausgaben-label-main { font-size: .88rem; font-weight: 600; color: var(--navy); }
+    .ausgaben-label-sub { font-size: .75rem; color: var(--gray-400); }
+    .ausgaben-bar-wrap { width: 140px; }
+    .ausgaben-bar-bg { height: 6px; background: var(--gray-100); border-radius: 100px; overflow: hidden; }
+    .ausgaben-bar-fill { height: 100%; border-radius: 100px; }
+    .ausgaben-amount { font-weight: 700; font-size: .92rem; color: var(--navy); text-align: right; min-width: 70px; }
+
+    /* ── EIGENANTEIL BREAKDOWN ── */
+    .breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--gray-100); font-size: .88rem; }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-label { color: var(--gray-600); display: flex; align-items: center; gap: 8px; }
+    .breakdown-label .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .breakdown-amount { font-weight: 700; color: var(--navy); }
+    .breakdown-amount.red { color: #b91c1c; }
+    .breakdown-total-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0; font-size: .95rem; font-weight: 700; border-top: 2px solid var(--navy); margin-top: 8px; }
+
+    /* ── VORGÄNGE TABLE ── */
+    .vorgang-row { display: grid; grid-template-columns: auto 1fr auto auto; gap: 12px 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--gray-100); }
+    .vorgang-row:last-child { border-bottom: none; }
+    .vorgang-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0; }
+    .vorgang-arzt { font-weight: 600; font-size: .88rem; color: var(--navy); }
+    .vorgang-sub { font-size: .75rem; color: var(--gray-400); }
+    .vorgang-status { text-align: right; }
+    .vorgang-betrag { font-weight: 700; font-size: .92rem; color: var(--navy); text-align: right; }
+    .vorgang-einspar { font-size: .72rem; color: var(--mint-dark); font-weight: 600; }
+
+    /* ── STILLE KÜRZUNG ── */
+    .stille-kuerzung-total { display: flex; align-items: center; gap: 16px; background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius); padding: 18px 22px; margin-bottom: 12px; }
+    .stille-num { font-family: var(--font-serif); font-size: 2.2rem; font-style: italic; color: #b45309; flex-shrink: 0; }
+    .stille-text { font-size: .88rem; color: #92400e; }
+    .stille-text strong { display: block; font-size: .95rem; color: #7c2d12; margin-bottom: 2px; }
+
+    /* ── PREMIUM UPSELL ── */
+    .upsell-band { background: var(--navy); border-radius: var(--radius-lg); padding: 28px 32px; margin-top: 36px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .upsell-left { }
+    .upsell-eyebrow { font-size: .72rem; font-weight: 700; color: var(--mint); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+    .upsell-title { font-family: var(--font-serif); font-size: 1.4rem; color: var(--white); margin-bottom: 8px; }
+    .upsell-sub { font-size: .88rem; color: rgba(255,255,255,.55); max-width: 460px; }
+    .upsell-bullets { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .upsell-bullets li { font-size: .84rem; color: rgba(255,255,255,.7); display: flex; align-items: center; gap: 8px; }
+    .upsell-bullets li i { color: var(--mint); font-size: .8rem; }
+    .btn-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--mint); color: var(--white); padding: 14px 28px; border-radius: 100px; font-weight: 700; font-size: .95rem; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; }
+    .btn-cta:hover { background: var(--mint-dark); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: rgba(255,255,255,.6); padding: 14px 28px; border-radius: 100px; font-weight: 600; font-size: .92rem; text-decoration: none; border: 1.5px solid rgba(255,255,255,.15); cursor: pointer; white-space: nowrap; margin-top: 10px; }
+    .upsell-ctas { display: flex; flex-direction: column; align-items: flex-start; }
+    .upsell-amount { font-family: var(--font-serif); font-size: 2.8rem; font-style: italic; color: var(--mint); margin-bottom: 4px; }
+    .upsell-amount-label { font-size: .78rem; color: rgba(255,255,255,.45); }
+
+    /* ── GESUNDHEITSCHRONIK ── */
+    .chronik-year { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-400); margin: 20px 0 12px; display: flex; align-items: center; gap: 10px; }
+    .chronik-year::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+    .chronik-entry { display: grid; grid-template-columns: 48px 1fr auto; gap: 0 16px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--gray-100); position: relative; }
+    .chronik-entry:last-of-type { border-bottom: none; }
+    .chronik-dot-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .chronik-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid; flex-shrink: 0; margin-top: 4px; }
+    .chronik-line { width: 2px; flex: 1; background: var(--gray-200); margin: 4px 0; min-height: 28px; }
+    .chronik-date { font-size: .72rem; font-weight: 700; color: var(--gray-400); text-align: center; line-height: 1.3; margin-top: 2px; }
+    .chronik-body { }
+    .chronik-arzt { font-weight: 700; font-size: .9rem; color: var(--navy); margin-bottom: 2px; }
+    .chronik-fach { font-size: .78rem; color: var(--gray-600); margin-bottom: 6px; }
+    .chronik-leistungen { display: flex; flex-wrap: wrap; gap: 5px; }
+    .chronik-pill { font-size: .72rem; background: var(--gray-100); color: var(--gray-600); padding: 2px 10px; border-radius: 100px; }
+    .chronik-pill.warn { background: var(--amber-light); color: #92400e; }
+    .chronik-pill.ok { background: var(--mint-light); color: var(--mint-dark); }
+    .chronik-right { text-align: right; white-space: nowrap; }
+    .chronik-betrag { font-weight: 700; font-size: .88rem; color: var(--navy); }
+    .chronik-status-mini { font-size: .7rem; margin-top: 3px; }
+
+    /* ── VORSORGE REMINDER ── */
+    .vorsorge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .vorsorge-card { border-radius: var(--radius-sm); padding: 14px 16px; border: 1px solid; }
+    .vorsorge-card.due { background: #fff8f8; border-color: #fca5a5; }
+    .vorsorge-card.soon { background: var(--amber-light); border-color: #fde68a; }
+    .vorsorge-card.ok { background: var(--mint-light); border-color: #6ee7b7; }
+    .vorsorge-icon { font-size: 1.1rem; margin-bottom: 6px; }
+    .vorsorge-name { font-weight: 700; font-size: .82rem; color: var(--navy); margin-bottom: 2px; }
+    .vorsorge-info { font-size: .75rem; color: var(--gray-600); }
+    .vorsorge-badge { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-top: 6px; }
+    .vb-due { background: var(--red-light); color: #b91c1c; }
+    .vb-soon { background: var(--amber-light); color: #92400e; border: 1px solid #fde68a; }
+    .vb-ok { background: var(--mint-light); color: var(--mint-dark); }
+
+    /* ── STAT BADGE ── */
+    .stat-badge { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; }
+    .sb-amber { background: var(--amber-light); color: #92400e; }
+    .sb-red { background: var(--red-light); color: #991b1b; }
+    .sb-mint { background: var(--mint-light); color: var(--mint-dark); }
+    .sb-gray { background: var(--gray-100); color: var(--gray-600); }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--gray-200); margin: 4px 0 16px; }
+
+    @media (max-width: 800px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .three-col { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 500px) {
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .three-col { grid-template-columns: 1fr; }
+      .header-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ HEADER ══════════════════════ -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">MediRight<span class="logo-dot"></span></a>
+    <nav class="header-nav">
+      <a href="#" class="nav-item active">Dashboard</a>
+      <a href="#" class="nav-item">Rechnungen</a>
+      <a href="#" class="nav-item">Ärzte</a>
+      <a href="#" class="nav-item">Widersprüche</a>
+    </nav>
+    <div class="header-user">
+      <span>Alexander S.</span>
+      <div class="avatar">AS</div>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ══════════════════════ GREETING ══════════════════════ -->
+  <div class="greeting-bar">
+    <div class="greeting-title">Ihr Gesundheits&shy;überblick <span>2025</span></div>
+    <div class="greeting-meta">
+      <span class="meta-pill"><i class="fa-solid fa-shield-halved"></i> AXA ActiveMed-U</span>
+      <span class="meta-pill active-pill"><i class="fa-solid fa-calendar"></i> 7 Vorgänge · Jan–Apr 2025</span>
+      <span class="meta-pill"><i class="fa-solid fa-whatsapp fa-brands"></i> Via WhatsApp eingereicht</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ KPI CARDS ══════════════════════ -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-eyebrow">Gesundheitsausgaben 2025</div>
+      <div class="kpi-num">€ 1.847</div>
+      <div class="kpi-sub">
+        7 abgerechnete Vorgänge
+        <span class="kpi-delta delta-up">+18% vs. 2024</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-eyebrow">Ihr Eigenanteil netto</div>
+      <div class="kpi-num">€ 312</div>
+      <div class="kpi-sub">nach Erstattung &amp; Selbstbehalt</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-eyebrow">Erstattungsquote AXA</div>
+      <div class="kpi-num">83<small style="font-size:1.1rem">%</small></div>
+      <div class="kpi-sub">
+        Ø andere AXA-Kunden: 89%
+        <span class="kpi-delta delta-up">−6 Pkte</span>
+      </div>
+    </div>
+    <div class="kpi-card dark">
+      <div class="kpi-eyebrow">Einsparpotenzial identifiziert</div>
+      <div class="kpi-num">€ 214</div>
+      <div class="kpi-sub">in 3 anfechtbaren Positionen</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ PROGNOSE BANNER ══════════════════════ -->
+  <div class="prognose-banner">
+    <div class="prognose-left">
+      <div class="prognose-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="prognose-text">
+        <strong>Jahresprognose 2025</strong><br>
+        Auf Basis Ihrer bisherigen 4 Monate: bis Dezember voraussichtlich
+      </div>
+    </div>
+    <div class="prognose-amount">
+      € 2.960
+      <span>Gesamtausgaben bis Dez. 2025</span>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 1: MEINE ÄRZTE
+  ════════════════════════════════════════════════════ -->
+  <div class="section-head">
+    <div class="section-title" style="color:var(--navy)">
+      <i class="fa-solid fa-user-doctor" style="color:var(--amber)"></i>
+      Meine Ärzte — Abrechnungsverhalten
+    </div>
+    <span class="section-badge badge-amber">2 Auffälligkeiten</span>
+  </div>
+
+  <!-- Arzt 1: Dr. Hartmann — FLAGGED -->
+  <div class="card flagged">
+    <div class="arzt-header">
+      <div>
+        <div class="arzt-name">Dr. med. Klaus Hartmann</div>
+        <div class="arzt-sub">Facharzt für Innere Medizin · München · 4 Besuche seit 2023</div>
+        <div class="arzt-badges">
+          <span class="stat-badge sb-amber"><i class="fa-solid fa-arrow-trend-up"></i> Faktor steigt</span>
+          <span class="stat-badge sb-amber"><i class="fa-solid fa-triangle-exclamation"></i> §12 GOÄ-Verstöße</span>
+        </div>
+      </div>
+      <div class="arzt-stat">
+        <div class="arzt-stat-num">€ 687</div>
+        <div class="arzt-stat-label">Gesamt 2023–2025</div>
+      </div>
+    </div>
+
+    <!-- Faktor-Verlauf Chart -->
+    <div class="faktor-verlauf">
+      <div class="faktor-verlauf-title"><i class="fa-solid fa-chart-bar" style="margin-right:5px"></i>Faktor-Entwicklung über Ihre 4 Besuche</div>
+      <div class="faktor-chart">
+        <!-- Bar 1 -->
+        <div class="faktor-bar-wrap">
+          <div class="faktor-bar-label">1,8×</div>
+          <div class="faktor-bar-outer">
+            <div class="faktor-bar-inner" style="height:26%; background: var(--mint-light);"></div>
+            <!-- threshold line at 2.3x = 66% height -->
+            <div class="faktor-threshold" style="bottom: 66%;"></div>
+          </div>
+          <div class="faktor-bar-date">Mär '23</div>
+        </div>
+        <!-- Bar 2 -->
+        <div class="faktor-bar-wrap">
+          <div class="faktor-bar-label">2,3×</div>
+          <div class="faktor-bar-outer">
+            <div class="faktor-bar-inner" style="height:66%; background: #fde68a;"></div>
+            <div class="faktor-threshold" style="bottom: 66%;"></div>
+          </div>
+          <div class="faktor-bar-date">Nov '23</div>
+        </div>
+        <!-- Bar 3 -->
+        <div class="faktor-bar-wrap">
+          <div class="faktor-bar-label">3,0×</div>
+          <div class="faktor-bar-outer">
+            <div class="faktor-bar-inner" style="height:87%; background: #fbbf24;"></div>
+            <div class="faktor-threshold" style="bottom: 66%;"></div>
+          </div>
+          <div class="faktor-bar-date">Jun '24</div>
+        </div>
+        <!-- Bar 4 — latest, red -->
+        <div class="faktor-bar-wrap">
+          <div class="faktor-bar-label" style="color:#b91c1c">3,5×</div>
+          <div class="faktor-bar-outer">
+            <div class="faktor-bar-inner" style="height:100%; background: #fca5a5;"></div>
+            <div class="faktor-threshold" style="bottom: 66%;"></div>
+          </div>
+          <div class="faktor-bar-date" style="color:#b91c1c">Mär '25</div>
+        </div>
+      </div>
+      <div class="faktor-legend">
+        <span><span style="width:20px;height:1.5px;background:var(--gray-400);border-top:1.5px dashed var(--gray-400);display:inline-block"></span> Schwellenwert 2,3× (§12 GOÄ)</span>
+        <span><span style="width:10px;height:10px;background:#fca5a5;border-radius:3px;display:inline-block"></span> Über Schwellenwert ohne Begründung</span>
+      </div>
+    </div>
+
+    <div class="alert-box alert-amber">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <div>
+        <strong>Faktor bei Dr. Hartmann stieg von 1,8× auf 3,5× — ohne §12-Begründung</strong>
+        Bei Ihrem letzten Besuch wurde der 3,5-fache Satz abgerechnet. Laut §12 GOÄ ist ab 2,3× eine schriftliche Begründung in der Rechnung Pflicht — diese fehlt. Das betrifft 3 Positionen (GOÄ Nr. 3, 5, 6) und macht €63,80 anfechtbar.
+        <div class="alert-action">→ Widerspruch vorbereiten (Premium)</div>
+      </div>
+    </div>
+
+    <div class="alert-box alert-amber">
+      <i class="fa-solid fa-code-merge"></i>
+      <div>
+        <strong>Unplausible Kumulation erkannt</strong>
+        GOÄ Nr. 3 (Eingehende Untersuchung) + Nr. 6 (Vollständige Untersuchung) wurden gleichzeitig abgerechnet. Diese Kombination tritt bei weniger als 3% aller Internisten auf — fachlich nur in Ausnahmefällen zulässig. Benchmarkdaten: Ø Faktor bei Internisten für Nr. 3 = 2,1×.
+      </div>
+    </div>
+  </div>
+
+  <!-- Arzt 2: Dr. Schulz — OK -->
+  <div class="card ok">
+    <div class="arzt-header">
+      <div>
+        <div class="arzt-name">Dr. med. Julia Schulz</div>
+        <div class="arzt-sub">Dermatologin · München · 2 Besuche 2024–2025</div>
+        <div class="arzt-badges">
+          <span class="stat-badge sb-mint"><i class="fa-solid fa-check"></i> Unauffällig</span>
+          <span class="stat-badge sb-gray">Ø Faktor 2,1×</span>
+        </div>
+      </div>
+      <div class="arzt-stat">
+        <div class="arzt-stat-num" style="color:var(--mint-dark)">€ 214</div>
+        <div class="arzt-stat-label">Gesamt 2024–2025</div>
+      </div>
+    </div>
+    <div style="font-size:.85rem; color:var(--gray-600)">Alle abgerechneten Faktoren liegen im Bereich 1,8–2,3× (unter dem Schwellenwert). Keine unplausiblen Ziffernkombinationen. Erstattungsquote AXA: 94%.</div>
+  </div>
+
+  <!-- Arzt 3: Labor Müller — AMBER -->
+  <div class="card flagged">
+    <div class="arzt-header">
+      <div>
+        <div class="arzt-name">Labor Müller GmbH</div>
+        <div class="arzt-sub">Labordiagnostik · 3 Einreichungen 2024–2025</div>
+        <div class="arzt-badges">
+          <span class="stat-badge sb-amber"><i class="fa-solid fa-vial"></i> Analoge Berechnung</span>
+        </div>
+      </div>
+      <div class="arzt-stat">
+        <div class="arzt-stat-num">€ 312</div>
+        <div class="arzt-stat-label">Gesamt</div>
+      </div>
+    </div>
+    <div class="alert-box alert-blue" style="margin-bottom:0">
+      <i class="fa-solid fa-flask"></i>
+      <div>
+        <strong>GOÄ-Analogziffer verwendet — Erstattung unsicher</strong>
+        2 Laborpositionen wurden analog nach GOÄ Nr. A 3695a berechnet. AXA lehnte diese im letzten Bescheid ohne Begründung ab. Ähnliche Ablehnungen bei dieser Analogposition: 38% der AXA-Versicherten in unserem Datensatz. <span class="alert-action">→ Erstattungsbescheid prüfen</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 2: AXA IM CHECK
+  ════════════════════════════════════════════════════ -->
+  <div class="section-head">
+    <div class="section-title">
+      <i class="fa-solid fa-shield-halved" style="color:var(--red)"></i>
+      Ihr Versicherer — AXA im Check
+    </div>
+    <span class="section-badge badge-red">Ihre Rate unter Durchschnitt</span>
+  </div>
+
+  <div class="two-col">
+
+    <!-- Ablehnungsrate -->
+    <div class="card">
+      <div class="chart-title"><i class="fa-solid fa-chart-line" style="margin-right:6px; color:var(--red)"></i>Ihre persönliche Ablehnungsrate</div>
+
+      <!-- Mini SVG line chart -->
+      <div class="svg-chart-wrap">
+        <svg viewBox="0 0 280 90" width="100%" height="90" xmlns="http://www.w3.org/2000/svg" style="overflow:visible">
+          <!-- Grid lines -->
+          <line x1="0" y1="72" x2="280" y2="72" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="0" y1="48" x2="280" y2="48" stroke="#e2e8f0" stroke-width="1"/>
+          <line x1="0" y1="24" x2="280" y2="24" stroke="#e2e8f0" stroke-width="1"/>
+          <!-- Y labels -->
+          <text x="-4" y="76" font-size="8" fill="#94a3b8" text-anchor="end">5%</text>
+          <text x="-4" y="52" font-size="8" fill="#94a3b8" text-anchor="end">10%</text>
+          <text x="-4" y="28" font-size="8" fill="#94a3b8" text-anchor="end">15%</text>
+          <!-- Avg line at 8% = y=57 -->
+          <line x1="0" y1="57" x2="280" y2="57" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="282" y="60" font-size="8" fill="#94a3b8">Ø</text>
+          <!-- Your line: 7%, 8%, 9%, 11%, 14% → y values inverted in 0-72 range (0%=72, 20%=0) -->
+          <!-- y = 72 - (pct/20)*72 -->
+          <!-- 7%→46.8, 8%→43.2, 9%→39.6, 11%→32.4, 14%→21.6 -->
+          <polyline points="14,47 84,43 154,40 224,32 280,22" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Dots -->
+          <circle cx="14"  cy="47" r="3.5" fill="#ef4444"/>
+          <circle cx="84"  cy="43" r="3.5" fill="#ef4444"/>
+          <circle cx="154" cy="40" r="3.5" fill="#ef4444"/>
+          <circle cx="224" cy="32" r="3.5" fill="#ef4444"/>
+          <circle cx="280" cy="22" r="4.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
+          <!-- Area fill -->
+          <polygon points="14,47 84,43 154,40 224,32 280,22 280,72 14,72" fill="#ef444415"/>
+          <!-- Last value label -->
+          <text x="274" y="16" font-size="9" font-weight="700" fill="#b91c1c" text-anchor="middle">14%</text>
+        </svg>
+        <div class="chart-labels">
+          <span>Q1 '24</span><span>Q2 '24</span><span>Q3 '24</span><span>Q4 '24</span><span>Q1 '25</span>
+        </div>
+      </div>
+
+      <div class="alert-box alert-red" style="margin-bottom:0">
+        <i class="fa-solid fa-arrow-trend-up"></i>
+        <div>
+          <strong>Ablehnungsrate steigt kontinuierlich</strong>
+          Von 7% (Q1 2024) auf 14% (Q1 2025) — doppelt so hoch wie Ø AXA-Kunden (8%). Besonders betroffen: Laborpositionen und analoge GOÄ-Ziffern.
+        </div>
+      </div>
+    </div>
+
+    <!-- Benchmark -->
+    <div class="card">
+      <div class="chart-title"><i class="fa-solid fa-users" style="margin-right:6px; color:var(--blue)"></i>Sie im Vergleich — AXA ActiveMed Kunden</div>
+      <div style="font-size:.78rem; color:var(--gray-400); margin-bottom:16px;">Basierend auf anonymisierten Daten ähnlicher Tarife (n=847)</div>
+
+      <div class="bench-row">
+        <div class="bench-left">
+          <div class="bench-label-main">Erstattungsquote gesamt</div>
+          <div class="bench-sub-text">Anteil der erstatteten Rechnungsbeträge</div>
+          <div class="bench-bar-container" style="margin-top:10px">
+            <div class="bench-fill-avg" style="width:89%"></div>
+            <div class="bench-fill-you fill-warn" style="width:83%"></div>
+          </div>
+          <div style="font-size:.7rem; color:var(--gray-400); margin-top:5px; display:flex; gap:10px;">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--amber);border-radius:50%;display:inline-block"></span>Sie: 83%</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--gray-200);border-radius:50%;display:inline-block"></span>Ø: 89%</span>
+          </div>
+        </div>
+        <div class="bench-values">
+          <div class="bench-you-val" style="color:#b45309">83%</div>
+          <div class="bench-avg-val">Ø 89%</div>
+        </div>
+      </div>
+
+      <div class="bench-row">
+        <div class="bench-left">
+          <div class="bench-label-main">Internist — Ø Faktor Ihrer Rechnungen</div>
+          <div class="bench-sub-text">GOÄ-Abrechnungsfaktor Innere Medizin</div>
+          <div class="bench-bar-container" style="margin-top:10px">
+            <div class="bench-fill-avg" style="width:43%"></div>
+            <div class="bench-fill-you fill-bad" style="width:70%"></div>
+          </div>
+          <div style="font-size:.7rem; color:var(--gray-400); margin-top:5px; display:flex; gap:10px;">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--red);border-radius:50%;display:inline-block"></span>Ihr Arzt: 3,5×</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--gray-200);border-radius:50%;display:inline-block"></span>Ø: 2,1×</span>
+          </div>
+        </div>
+        <div class="bench-values">
+          <div class="bench-you-val" style="color:#b91c1c">3,5×</div>
+          <div class="bench-avg-val">Ø 2,1×</div>
+        </div>
+      </div>
+
+      <div class="bench-row">
+        <div class="bench-left">
+          <div class="bench-label-main">Labor — Analogziffer-Ablehnungsrate</div>
+          <div class="bench-sub-text">Anteil abgelehnter Analogpositionen</div>
+          <div class="bench-bar-container" style="margin-top:10px">
+            <div class="bench-fill-avg" style="width:38%"></div>
+            <div class="bench-fill-you fill-warn" style="width:38%"></div>
+          </div>
+          <div style="font-size:.7rem; color:var(--gray-400); margin-top:5px; display:flex; gap:10px;">
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--amber);border-radius:50%;display:inline-block"></span>AXA: 38%</span>
+            <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--gray-200);border-radius:50%;display:inline-block"></span>Andere PKV: 22%</span>
+          </div>
+        </div>
+        <div class="bench-values">
+          <div class="bench-you-val" style="color:#b45309">38%</div>
+          <div class="bench-avg-val">Ø PKV: 22%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stille Kürzung -->
+  <div class="card" style="margin-bottom:0">
+    <div class="chart-title" style="margin-bottom:16px"><i class="fa-solid fa-eye-slash" style="margin-right:6px; color:var(--amber)"></i>Die stille Kürzung — kumuliert seit Ihrer ersten Einreichung</div>
+
+    <div class="stille-kuerzung-total">
+      <div class="stille-num">€ 127</div>
+      <div class="stille-text">
+        <strong>Weniger erstattet als gesetzlich zulässig — ohne formelle Ablehnung</strong>
+        AXA hat in 5 Vorgängen Erstattungen still gekürzt: nicht abgelehnt, aber weniger überwiesen als lt. Tarif zulässig. Diese Kürzungen erscheinen nie als "Ablehnung" in Ihrer Statistik — und genau das macht sie so gefährlich.
+      </div>
+    </div>
+
+    <div class="three-col" style="gap:12px">
+      <div style="background:var(--gray-50); border-radius:var(--radius-sm); padding:14px 16px;">
+        <div style="font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--gray-400); margin-bottom:6px">Laborpositionen</div>
+        <div style="font-family:var(--font-serif); font-size:1.4rem; font-style:italic; color:#b45309">€ 74</div>
+        <div style="font-size:.78rem; color:var(--gray-600)">3 Vorgänge, AXA Analogziffer-Kürzung</div>
+      </div>
+      <div style="background:var(--gray-50); border-radius:var(--radius-sm); padding:14px 16px;">
+        <div style="font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--gray-400); margin-bottom:6px">Internist Faktoren</div>
+        <div style="font-family:var(--font-serif); font-size:1.4rem; font-style:italic; color:#b45309">€ 38</div>
+        <div style="font-size:.78rem; color:var(--gray-600)">Faktor gekürzt ohne schriftl. Begründung</div>
+      </div>
+      <div style="background:var(--gray-50); border-radius:var(--radius-sm); padding:14px 16px;">
+        <div style="font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--gray-400); margin-bottom:6px">Sonstige</div>
+        <div style="font-family:var(--font-serif); font-size:1.4rem; font-style:italic; color:#b45309">€ 15</div>
+        <div style="font-size:.78rem; color:var(--gray-600)">Tarifabweichungen, 2 Vorgänge</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 3: GESUNDHEITSCONTROLLING
+  ════════════════════════════════════════════════════ -->
+  <div class="section-head">
+    <div class="section-title">
+      <i class="fa-solid fa-chart-pie" style="color:var(--purple)"></i>
+      Persönliches Gesundheitscontrolling
+    </div>
+    <span class="section-badge badge-gray">Jan–Apr 2025</span>
+  </div>
+
+  <div class="two-col">
+
+    <!-- Ausgaben nach Fachrichtung -->
+    <div class="card">
+      <div class="chart-title" style="margin-bottom:16px"><i class="fa-solid fa-stethoscope" style="margin-right:6px; color:var(--purple)"></i>Ausgaben nach Facharztgruppe</div>
+
+      <div class="ausgaben-row">
+        <div class="ausgaben-icon" style="background:rgba(239,68,68,.1); color:#b91c1c"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="ausgaben-label">
+          <div class="ausgaben-label-main">Innere Medizin</div>
+          <div class="ausgaben-label-sub">Dr. Hartmann · 2 Besuche</div>
+        </div>
+        <div class="ausgaben-bar-wrap">
+          <div class="ausgaben-bar-bg"><div class="ausgaben-bar-fill" style="width:100%; background:#fca5a5"></div></div>
+        </div>
+        <div class="ausgaben-amount">€ 687</div>
+      </div>
+
+      <div class="ausgaben-row">
+        <div class="ausgaben-icon" style="background:rgba(139,92,246,.1); color:var(--purple)"><i class="fa-solid fa-flask"></i></div>
+        <div class="ausgaben-label">
+          <div class="ausgaben-label-main">Labor</div>
+          <div class="ausgaben-label-sub">Labor Müller · 3 Einreichungen</div>
+        </div>
+        <div class="ausgaben-bar-wrap">
+          <div class="ausgaben-bar-bg"><div class="ausgaben-bar-fill" style="width:45%; background:#c4b5fd"></div></div>
+        </div>
+        <div class="ausgaben-amount">€ 312</div>
+      </div>
+
+      <div class="ausgaben-row">
+        <div class="ausgaben-icon" style="background:rgba(59,130,246,.1); color:var(--blue)"><i class="fa-solid fa-microscope"></i></div>
+        <div class="ausgaben-label">
+          <div class="ausgaben-label-main">Dermatologie</div>
+          <div class="ausgaben-label-sub">Dr. Schulz · 1 Besuch</div>
+        </div>
+        <div class="ausgaben-bar-wrap">
+          <div class="ausgaben-bar-bg"><div class="ausgaben-bar-fill" style="width:31%; background:#93c5fd"></div></div>
+        </div>
+        <div class="ausgaben-amount">€ 214</div>
+      </div>
+
+      <div class="ausgaben-row">
+        <div class="ausgaben-icon" style="background:rgba(16,185,129,.1); color:var(--mint-dark)"><i class="fa-solid fa-eye"></i></div>
+        <div class="ausgaben-label">
+          <div class="ausgaben-label-main">Augenheilkunde</div>
+          <div class="ausgaben-label-sub">Praxis Zentrum Sehen · 1 Besuch</div>
+        </div>
+        <div class="ausgaben-bar-wrap">
+          <div class="ausgaben-bar-bg"><div class="ausgaben-bar-fill" style="width:22%; background:#6ee7b7"></div></div>
+        </div>
+        <div class="ausgaben-amount">€ 152</div>
+      </div>
+
+      <div class="ausgaben-row" style="border:none">
+        <div class="ausgaben-icon" style="background:var(--gray-100); color:var(--gray-400)"><i class="fa-solid fa-pills"></i></div>
+        <div class="ausgaben-label">
+          <div class="ausgaben-label-main">Weitere</div>
+          <div class="ausgaben-label-sub">Physiotherapie, Zahnarzt</div>
+        </div>
+        <div class="ausgaben-bar-wrap">
+          <div class="ausgaben-bar-bg"><div class="ausgaben-bar-fill" style="width:70%; background:var(--gray-200)"></div></div>
+        </div>
+        <div class="ausgaben-amount">€ 482</div>
+      </div>
+
+      <div style="border-top:2px solid var(--navy); padding-top:12px; display:flex; justify-content:space-between; font-weight:700; font-size:.95rem; color:var(--navy); margin-top:4px">
+        <span>Gesamt 2025</span><span>€ 1.847</span>
+      </div>
+    </div>
+
+    <!-- Eigenanteil Breakdown -->
+    <div class="card">
+      <div class="chart-title" style="margin-bottom:16px"><i class="fa-solid fa-wallet" style="margin-right:6px; color:var(--mint-dark)"></i>Ihr tatsächlicher Eigenanteil</div>
+
+      <div class="breakdown-row">
+        <div class="breakdown-label"><span class="dot" style="background:#ef4444"></span>Abgelehnte Positionen</div>
+        <div class="breakdown-amount red">+ € 87</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label"><span class="dot" style="background:#f59e0b"></span>Stille Kürzungen</div>
+        <div class="breakdown-amount red">+ € 127</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label"><span class="dot" style="background:#94a3b8"></span>Selbstbehalt (Tarif)</div>
+        <div class="breakdown-amount">+ € 150</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label"><span class="dot" style="background:#e2e8f0"></span>Reguläre Zuzahlung</div>
+        <div class="breakdown-amount">− € 52</div>
+      </div>
+      <div class="breakdown-total-row">
+        <span>Ihr Eigenanteil netto</span>
+        <span style="font-size:1.3rem; font-family:var(--font-serif); font-style:italic">€ 312</span>
+      </div>
+
+      <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--gray-100)">
+        <div class="chart-title" style="margin-bottom:12px"><i class="fa-solid fa-calendar-check" style="margin-right:6px; color:var(--blue)"></i>Jahresvergleich Eigenanteil</div>
+        <div style="display:flex; gap:8px; align-items:flex-end; height:60px">
+          <!-- 2022 -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px">
+            <div style="font-size:.72rem; font-weight:700; color:var(--gray-600)">€ 98</div>
+            <div style="width:100%; height:20px; background:var(--gray-200); border-radius:4px 4px 0 0"></div>
+            <div style="font-size:.68rem; color:var(--gray-400)">2022</div>
+          </div>
+          <!-- 2023 -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px">
+            <div style="font-size:.72rem; font-weight:700; color:var(--gray-600)">€ 141</div>
+            <div style="width:100%; height:29px; background:var(--gray-300); border-radius:4px 4px 0 0"></div>
+            <div style="font-size:.68rem; color:var(--gray-400)">2023</div>
+          </div>
+          <!-- 2024 -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px">
+            <div style="font-size:.72rem; font-weight:700; color:var(--gray-600)">€ 224</div>
+            <div style="width:100%; height:46px; background:var(--amber-light); border-radius:4px 4px 0 0"></div>
+            <div style="font-size:.68rem; color:var(--gray-400)">2024</div>
+          </div>
+          <!-- 2025 (forecast) -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px">
+            <div style="font-size:.72rem; font-weight:700; color:#b91c1c">€ 312*</div>
+            <div style="width:100%; height:57px; background:var(--red-light); border: 2px dashed #fca5a5; border-bottom:none; border-radius:4px 4px 0 0; position:relative">
+              <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%); font-size:.6rem; color:#b91c1c; white-space:nowrap; font-weight:700">↑ +39%</div>
+            </div>
+            <div style="font-size:.68rem; color:#b91c1c; font-weight:600">2025</div>
+          </div>
+        </div>
+        <div style="font-size:.72rem; color:var(--gray-400); margin-top:6px">* hochgerechnet auf Basis Jan–Apr</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       LETZTE VORGÄNGE
+  ════════════════════════════════════════════════════ -->
+  <div class="section-head">
+    <div class="section-title">
+      <i class="fa-solid fa-clock-rotate-left" style="color:var(--gray-400)"></i>
+      Letzte Vorgänge
+    </div>
+    <a href="#" style="font-size:.82rem; font-weight:600; color:var(--mint-dark); text-decoration:none">Alle anzeigen →</a>
+  </div>
+
+  <div class="card">
+    <div class="vorgang-row">
+      <div class="vorgang-icon" style="background:#fff8f8; color:#b91c1c"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div>
+        <div class="vorgang-arzt">Dr. med. Klaus Hartmann — Innere Medizin</div>
+        <div class="vorgang-sub">14. März 2025 · GOÄ Nr. 3, 5, 6 · Faktor 3,5× ohne §12-Begründung</div>
+      </div>
+      <div class="vorgang-status"><span class="stat-badge sb-amber">Prüfen</span></div>
+      <div class="vorgang-betrag">€ 218,47<div class="vorgang-einspar">€ 63,80 anfechtbar</div></div>
+    </div>
+    <div class="vorgang-row">
+      <div class="vorgang-icon" style="background:#fff8f8; color:#b91c1c"><i class="fa-solid fa-vial"></i></div>
+      <div>
+        <div class="vorgang-arzt">Labor Müller GmbH — Blutbild + Analoge Ziffer</div>
+        <div class="vorgang-sub">2. März 2025 · GOÄ A 3695a analog · AXA-Ablehnung</div>
+      </div>
+      <div class="vorgang-status"><span class="stat-badge sb-red">Abgelehnt</span></div>
+      <div class="vorgang-betrag">€ 147,20<div class="vorgang-einspar">€ 74,00 anfechtbar</div></div>
+    </div>
+    <div class="vorgang-row">
+      <div class="vorgang-icon" style="background:var(--mint-light); color:var(--mint-dark)"><i class="fa-solid fa-check"></i></div>
+      <div>
+        <div class="vorgang-arzt">Dr. med. Julia Schulz — Dermatologie</div>
+        <div class="vorgang-sub">18. Februar 2025 · 4 Positionen · Faktor Ø 2,1×</div>
+      </div>
+      <div class="vorgang-status"><span class="stat-badge sb-mint">Erstattet</span></div>
+      <div class="vorgang-betrag">€ 214,00<div class="vorgang-einspar" style="color:var(--mint-dark)">94% erstattet ✓</div></div>
+    </div>
+    <div class="vorgang-row">
+      <div class="vorgang-icon" style="background:var(--blue-light); color:var(--blue)"><i class="fa-solid fa-eye"></i></div>
+      <div>
+        <div class="vorgang-arzt">Praxis Zentrum Sehen — Augenheilkunde</div>
+        <div class="vorgang-sub">5. Januar 2025 · Routineuntersuchung</div>
+      </div>
+      <div class="vorgang-status"><span class="stat-badge sb-mint">Erstattet</span></div>
+      <div class="vorgang-betrag">€ 152,00</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 4: GESUNDHEITSCHRONIK
+  ════════════════════════════════════════════════════ -->
+  <div class="section-head">
+    <div class="section-title">
+      <i class="fa-solid fa-book-medical" style="color:var(--blue)"></i>
+      Meine Gesundheitschronik
+    </div>
+    <span class="section-badge badge-gray">11 Vorgänge seit 2022</span>
+  </div>
+
+  <div class="two-col" style="align-items:start">
+
+    <!-- Timeline -->
+    <div class="card">
+      <div style="font-size:.82rem; color:var(--gray-600); margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+        <i class="fa-solid fa-circle-info" style="color:var(--blue)"></i>
+        Neutrale Übersicht Ihrer Arztbesuche auf Basis der eingereichten Rechnungen — ohne medizinische Bewertung.
+      </div>
+
+      <!-- 2025 -->
+      <div class="chronik-year">2025</div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Mär<br>2025</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Dr. med. Klaus Hartmann</div>
+          <div class="chronik-fach"><i class="fa-solid fa-heart-pulse" style="margin-right:4px; color:var(--gray-400)"></i>Innere Medizin · München</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill warn">Eingehende Untersuchung (GOÄ 3)</span>
+            <span class="chronik-pill warn">Vollst. Untersuchung (GOÄ 6)</span>
+            <span class="chronik-pill warn">Faktor 3,5× ⚠</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 218,47</div>
+          <div class="chronik-status-mini" style="color:#b45309">Prüfen</div>
+        </div>
+      </div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Mär<br>2025</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Labor Müller GmbH</div>
+          <div class="chronik-fach"><i class="fa-solid fa-flask" style="margin-right:4px; color:var(--gray-400)"></i>Labordiagnostik</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill">Blutbild (GOÄ 3550)</span>
+            <span class="chronik-pill warn">Analogziffer A 3695a ⚠</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 147,20</div>
+          <div class="chronik-status-mini" style="color:#b91c1c">Abgelehnt</div>
+        </div>
+      </div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Feb<br>2025</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Dr. med. Julia Schulz</div>
+          <div class="chronik-fach"><i class="fa-solid fa-microscope" style="margin-right:4px; color:var(--gray-400)"></i>Dermatologie · München</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill ok">Hautuntersuchung (GOÄ 750)</span>
+            <span class="chronik-pill ok">Faktor 2,1×</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 214,00</div>
+          <div class="chronik-status-mini" style="color:var(--mint-dark)">✓ Erstattet</div>
+        </div>
+      </div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Jan<br>2025</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Praxis Zentrum Sehen</div>
+          <div class="chronik-fach"><i class="fa-solid fa-eye" style="margin-right:4px; color:var(--gray-400)"></i>Augenheilkunde</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill ok">Augenuntersuchung (GOÄ 1200)</span>
+            <span class="chronik-pill ok">Tonometrie (GOÄ 1240)</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 152,00</div>
+          <div class="chronik-status-mini" style="color:var(--mint-dark)">✓ Erstattet</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="chronik-year">2024</div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Jun<br>2024</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Dr. med. Klaus Hartmann</div>
+          <div class="chronik-fach"><i class="fa-solid fa-heart-pulse" style="margin-right:4px; color:var(--gray-400)"></i>Innere Medizin</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill warn">Eingehende Untersuchung (GOÄ 3)</span>
+            <span class="chronik-pill warn">Faktor 3,0×</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 186,40</div>
+          <div class="chronik-status-mini" style="color:var(--mint-dark)">Erstattet</div>
+        </div>
+      </div>
+
+      <div class="chronik-entry">
+        <div>
+          <div class="chronik-date">Feb<br>2024</div>
+        </div>
+        <div class="chronik-body">
+          <div class="chronik-arzt">Dr. med. Julia Schulz</div>
+          <div class="chronik-fach"><i class="fa-solid fa-microscope" style="margin-right:4px; color:var(--gray-400)"></i>Dermatologie</div>
+          <div class="chronik-leistungen">
+            <span class="chronik-pill ok">Erstuntersuchung (GOÄ 5)</span>
+            <span class="chronik-pill ok">Faktor 2,3×</span>
+          </div>
+        </div>
+        <div class="chronik-right">
+          <div class="chronik-betrag">€ 98,50</div>
+          <div class="chronik-status-mini" style="color:var(--mint-dark)">✓ Erstattet</div>
+        </div>
+      </div>
+
+      <!-- 2023 collapsed -->
+      <div class="chronik-year">2023</div>
+      <div style="background:var(--gray-50); border-radius:var(--radius-sm); padding:12px 16px; text-align:center; font-size:.84rem; color:var(--gray-600); cursor:pointer; border: 1px dashed var(--gray-200);">
+        <i class="fa-solid fa-chevron-down" style="margin-right:6px; color:var(--gray-400)"></i>3 weitere Vorgänge aus 2023 anzeigen
+      </div>
+    </div>
+
+    <!-- Vorsorge-Erinnerungen -->
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="chart-title" style="margin-bottom:4px"><i class="fa-solid fa-calendar-check" style="margin-right:6px; color:var(--mint-dark)"></i>Vorsorge-Erinnerungen</div>
+        <div style="font-size:.78rem; color:var(--gray-400); margin-bottom:16px;">Basierend auf Ihren Leistungsziffern — keine medizinische Bewertung</div>
+
+        <div class="vorsorge-grid">
+          <div class="vorsorge-card due">
+            <div class="vorsorge-icon">🫀</div>
+            <div class="vorsorge-name">Internist Folge-Check</div>
+            <div class="vorsorge-info">Letzter Besuch: Mär '25<br>Empf. Intervall: 6 Monate</div>
+            <span class="vorsorge-badge vb-due">Fällig Sep 2025</span>
+          </div>
+          <div class="vorsorge-card soon">
+            <div class="vorsorge-icon">🔬</div>
+            <div class="vorsorge-name">Labor-Kontrolle</div>
+            <div class="vorsorge-info">Letzter Befund: Mär '25<br>Empf. Intervall: 12 Monate</div>
+            <span class="vorsorge-badge vb-soon">Fällig Mär 2026</span>
+          </div>
+          <div class="vorsorge-card ok">
+            <div class="vorsorge-icon">👁️</div>
+            <div class="vorsorge-name">Augenarzt-Kontrolle</div>
+            <div class="vorsorge-info">Letzter Besuch: Jan '25<br>Empf. Intervall: 24 Monate</div>
+            <span class="vorsorge-badge vb-ok">Jan 2027 ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arzt-Statistik kompakt -->
+      <div class="card">
+        <div class="chart-title" style="margin-bottom:14px"><i class="fa-solid fa-ranking-star" style="margin-right:6px; color:var(--purple)"></i>Ihre Arzt-Statistik auf einen Blick</div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:var(--gray-50); border-radius:var(--radius-sm);">
+            <div>
+              <div style="font-weight:700; font-size:.85rem; color:var(--navy)">Dr. Hartmann</div>
+              <div style="font-size:.75rem; color:var(--gray-400)">4 Besuche · Innere Medizin</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700; font-size:.9rem; color:#b91c1c">Ø 2,9×</div>
+              <div style="font-size:.72rem; color:var(--gray-400)">Ø Faktor</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:var(--gray-50); border-radius:var(--radius-sm);">
+            <div>
+              <div style="font-weight:700; font-size:.85rem; color:var(--navy)">Dr. Schulz</div>
+              <div style="font-size:.75rem; color:var(--gray-400)">2 Besuche · Dermatologie</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700; font-size:.9rem; color:var(--mint-dark)">Ø 2,2×</div>
+              <div style="font-size:.72rem; color:var(--gray-400)">Ø Faktor</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:var(--gray-50); border-radius:var(--radius-sm);">
+            <div>
+              <div style="font-weight:700; font-size:.85rem; color:var(--navy)">Labor Müller</div>
+              <div style="font-size:.75rem; color:var(--gray-400)">3 Einreichungen · Labor</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:700; font-size:.9rem; color:#b45309">38% Ablehnung</div>
+              <div style="font-size:.72rem; color:var(--gray-400)">AXA-Ablehnungsrate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Share-Card Teaser -->
+        <div style="margin-top:16px; border-top:1px solid var(--gray-100); padding-top:14px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div style="font-size:.82rem; font-weight:700; color:var(--navy); margin-bottom:2px">
+              <i class="fa-solid fa-share-nodes" style="margin-right:5px; color:var(--purple)"></i>Mein Gesundheitsjahr 2025
+            </div>
+            <div style="font-size:.75rem; color:var(--gray-600)">Jährliche Zusammenfassung als PDF oder Share-Card erstellen</div>
+          </div>
+          <a href="#" style="display:inline-flex; align-items:center; gap:6px; font-size:.8rem; font-weight:700; color:var(--purple); background:var(--purple-light); padding:7px 14px; border-radius:100px; text-decoration:none;">
+            <i class="fa-solid fa-file-export"></i> Export
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════
+       PREMIUM UPSELL
+  ════════════════════════════════════════════════════ -->
+  <div class="upsell-band">
+    <div class="upsell-left">
+      <div class="upsell-eyebrow"><i class="fa-solid fa-lock-open" style="margin-right:5px"></i>MediRight Premium</div>
+      <div class="upsell-title">€ 214 warten auf Ihren Widerspruch.</div>
+      <div class="upsell-sub">In 3 Vorgängen haben wir anfechtbare Positionen identifiziert. Mit Premium erstellen wir die rechtssicheren Widerspruchsschreiben — fertig zum Versand.</div>
+      <ul class="upsell-bullets">
+        <li><i class="fa-solid fa-file-signature"></i> Widerspruchsbrief gegen AXA-Ablehnung (Labor)</li>
+        <li><i class="fa-solid fa-scale-balanced"></i> §12 GOÄ-Beanstandung an Dr. Hartmann</li>
+        <li><i class="fa-solid fa-bell"></i> Automatische Fristenüberwachung (Verjährung 3 Jahre)</li>
+        <li><i class="fa-solid fa-chart-bar"></i> Vollständige Benchmark-Daten unbegrenzt</li>
+      </ul>
+    </div>
+    <div class="upsell-ctas">
+      <div style="text-align:center; margin-bottom:16px">
+        <div class="upsell-amount">€ 214</div>
+        <div class="upsell-amount-label">potenzielle Rückerstattung</div>
+      </div>
+      <a href="#" class="btn-cta"><i class="fa-solid fa-file-signature"></i> Widersprüche jetzt starten</a>
+      <a href="#" class="btn-secondary"><i class="fa-solid fa-eye"></i> Beispiel-Widerspruch ansehen</a>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
