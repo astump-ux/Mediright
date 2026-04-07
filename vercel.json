@@ -2,13 +2,29 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.html",
+      "src": "*.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/demos",
+      "dest": "/demos.html"
+    },
+    {
+      "src": "/analyse",
+      "dest": "/mediright_analyse_demo.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/mediright_dashboard.html"
+    },
+    {
+      "src": "/(.*\\.html)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/",
       "dest": "/index.html"
     }
   ]
