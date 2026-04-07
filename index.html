@@ -797,15 +797,20 @@
 <body>
 
   <!-- ── HEADER ────────────────────────────────────────────── -->
+
+  <!-- ── HEADER ────────────────────────────────────────────── -->
   <header>
     <div class="container">
       <div class="header-inner">
-        <a href="#" class="logo">
-          MediRight<span class="logo-dot"></span>
-        </a>
-        <a href="#cta" class="btn btn-outline">
-          <i class="fa-solid fa-arrow-right"></i> Jetzt testen
-        </a>
+        <a href="#" class="logo">MediRight<span class="logo-dot"></span></a>
+        <div style="display:flex;gap:12px;align-items:center;">
+          <a href="demos.html" class="btn btn-outline" style="font-size:.82rem;">
+            <i class="fa-solid fa-play"></i> Demo ansehen
+          </a>
+          <a href="#cta" class="btn btn-outline">
+            <i class="fa-solid fa-arrow-right"></i> Jetzt testen
+          </a>
+        </div>
       </div>
     </div>
   </header>
@@ -819,14 +824,29 @@
         <!-- Left: Copy -->
         <div>
           <div class="hero-pre animate-fade-up">
-            Exklusiv für Beihilfeberechtigte &amp; Privatversicherte
+            Für Privatversicherte &amp; Beihilfeberechtigte
           </div>
           <h1 class="animate-fade-up delay-1">
-            Beihilfe kürzt, PKV stellt sich quer? <em>Bleiben Sie nicht auf Ihren Arztkosten sitzen.</em>
+            Ihre PKV kämpft gegen Sie. <em>Jetzt kämpfen Sie zurück.</em>
           </h1>
           <p class="hero-sub animate-fade-up delay-2">
-            Ihre Versicherung hat eine Abteilung voller GoÄ-Spezialisten, die aktiv nach Kürzungsgründen suchen. Sie bekommen eine unleserliche PDF mit 15 Ziffern – ohne Erklärung, ohne Gegenwehr. Das ändern wir. Laden Sie Ihre Rechnung hoch, unsere KI prüft jeden Posten in Sekunden und generiert einen rechtssicheren Widerspruch. <strong style="color:rgba(255,255,255,.9);">Sie zahlen nur bei Erfolg.</strong>
+            AXA, Signal, Debeka — jede Kasse hat eine Abteilung voller GOÄ-Spezialisten, die aktiv nach Kürzungsgründen suchen. Sie bekommen eine unleserliche PDF mit 15 Ziffern. MediRight dreht den Spieß um: Rechnung per WhatsApp weiterleiten, in Sekunden wissen was anfechtbar ist, und was Ihr Arzt systematisch zu viel berechnet.
           </p>
+          <!-- WhatsApp Flow Pill -->
+          <div class="animate-fade-up delay-3" style="margin-top:32px; display:flex; flex-direction:column; gap:10px; max-width:440px;">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">📄</div>
+              <div style="font-size:.88rem;color:rgba(255,255,255,.8);">PDF aus dem AXA-Portal laden — <strong style="color:white;">2 Taps</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">💬</div>
+              <div style="font-size:.88rem;color:rgba(255,255,255,.8);">An MediRight-WhatsApp weiterleiten — <strong style="color:white;">1 Tap</strong></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:14px;padding:14px 18px;">
+              <div style="width:36px;height:36px;border-radius:10px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">⚡</div>
+              <div style="font-size:.88rem;color:rgba(255,255,255,.9);"><strong style="color:var(--mint);">Analyse in 60 Sekunden</strong> — was anfechtbar ist, was Ihr Arzt falsch berechnet</div>
+            </div>
+          </div>
         </div>
 
         <!-- Right: Card -->
@@ -836,16 +856,16 @@
               <i class="fa-solid fa-circle-check"></i>
               Kostenlos &amp; unverbindlich
             </div>
-            <h3>Wie hoch ist Ihre Kürzung?</h3>
-            <p>Laden Sie jetzt Ihre Rechnung hoch – in 60 Sekunden sehen Sie, ob ein Widerspruch Aussicht auf Erfolg hat.</p>
+            <h3>Ihr erster Check — in 60 Sekunden.</h3>
+            <p>Speichern Sie die Nummer, leiten Sie Ihre nächste Arztrechnung weiter. Keine App, keine Registrierung — nur Ihre Telefonnummer.</p>
             <a href="#cta" class="btn btn-hero">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              Jetzt kostenlosen Erst-Check starten
+              <i class="fa-brands fa-whatsapp"></i>
+              WhatsApp-Nummer anfordern
             </a>
             <div class="trust-row">
               <div class="trust-item">
                 <i class="fa-solid fa-lock" style="color:var(--mint)"></i>
-                100% DSGVO-konform
+                100 % DSGVO-konform
               </div>
               <div class="trust-item">
                 <span>🇩🇪</span>
@@ -864,111 +884,90 @@
   </section>
 
 
-  <!-- ── PAIN POINTS ───────────────────────────────────────── -->
+  <!-- ── PAIN / BENEFITS ───────────────────────────────────── -->
   <section class="pain-section">
     <div class="container">
-      <div class="section-eyebrow">Warum MediRight?</div>
-      <h2 class="section-title">Fünf Gründe, warum Geld auf dem Tisch liegen bleibt.</h2>
+      <div class="section-eyebrow">Was MediRight sieht, was Sie nicht sehen</div>
+      <h2 class="section-title">Vier Ebenen, auf denen Geld verloren geht.</h2>
 
-      <div class="pain-grid">
+      <div class="pain-grid" style="grid-template-columns:repeat(4,1fr);">
 
         <div class="pain-card">
-          <div class="pain-icon">
-            <i class="fa-solid fa-scale-balanced"></i>
-          </div>
-          <h3>Wenn sich die Ämter streiten.</h3>
-          <p>Die PKV zahlt, aber die Beihilfe streicht die Leistung? Wir beenden das Ping-Pong-Spiel und fordern Ihr Geld gezielt dort ein, wo es hängt.</p>
+          <div class="pain-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <h3>Die fehlerhafte Rechnung.</h3>
+          <p>Rechnet Ihr Arzt über dem 2,3-fachen Schwellenwert ab, ist nach §&thinsp;12 GOÄ eine schriftliche Begründung Pflicht. Fehlt sie, ist jede Kürzung durch die Kasse automatisch anfechtbar — die meisten Versicherten ahnen das nie.</p>
         </div>
 
         <div class="pain-card">
-          <div class="pain-icon">
-            <i class="fa-solid fa-file-invoice"></i>
-          </div>
-          <h3>Schluss mit dem Faktor-Chaos.</h3>
-          <p>Rechnet der Arzt über dem 2,3-fachen Schwellenwert ab, ist er nach §&thinsp;12 GOÄ verpflichtet, das schriftlich zu begründen. Fehlt diese Begründung, ist die Kürzung durch die Kasse automatisch anfechtbar – die meisten Versicherten ahnen das nicht.</p>
+          <div class="pain-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          <h3>Der Arzt, der teurer wird.</h3>
+          <p>Berechnet Ihnen Dr. Hartmann beim vierten Besuch 3,5× statt früher 1,8×? MediRight erkennt solche Faktor-Eskalationen über mehrere Besuche — und zeigt Ihnen, wo Ihr Arzt systematisch über dem Fachgruppen-Durchschnitt liegt.</p>
         </div>
 
         <div class="pain-card">
-          <div class="pain-icon">
-            <i class="fa-solid fa-clock"></i>
-          </div>
-          <h3>Ihr Wochenende gehört Ihnen.</h3>
-          <p>Keine mühsamen Widersprüche am Sonntagabend. Ein Foto der Rechnung reicht – unsere Engine übernimmt die Argumentation vollständig.</p>
-        </div>
-
-        <div class="pain-card">
-          <div class="pain-icon">
-            <i class="fa-solid fa-eye-slash"></i>
-          </div>
+          <div class="pain-icon"><i class="fa-solid fa-eye-slash"></i></div>
           <h3>Die stille Kürzung.</h3>
-          <p>Nicht jede Kürzung kommt mit einem Brief. Oft zahlt die Kasse einfach still einen kleineren Betrag aus – ohne Erklärung, ohne Hinweis. Wer die Originalrechnung nicht gegen den Erstattungsbescheid abgleicht, verliert das Geld, ohne es je zu bemerken.</p>
+          <p>Nicht jede Kürzung kommt mit einem Brief. Oft überweist die Kasse einfach einen kleineren Betrag — ohne Erklärung. Summiert über alle Vorgänge entstehen so schnell 100–200&nbsp;€ im Jahr, die still verschwinden.</p>
         </div>
 
         <div class="pain-card">
-          <div class="pain-icon">
-            <i class="fa-solid fa-folder-open"></i>
-          </div>
-          <h3>Volle Kontrolle. Immer.</h3>
-          <p>MediRight organisiert automatisch alle Ihre Arztrechnungen und Erstattungsbescheide an einem Ort. Mit Statustracking sehen Sie auf einen Blick: Was wurde eingereicht, was wurde gekürzt, was ist noch offen – vollständige Transparenz ohne Excel-Tabellen.</p>
+          <div class="pain-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Die steigende Ablehnungsrate.</h3>
+          <p>Ihre persönliche Ablehnungsrate steigt, während andere AXA-Kunden 6&nbsp;% mehr erstattet bekommen als Sie? Das sieht nur, wer alle Vorgänge im Blick hat — nicht nur die einzelne Rechnung.</p>
         </div>
 
       </div>
+
+      <!-- Demo Link -->
+      <div style="text-align:center; margin-top:44px;">
+        <a href="demos.html" class="btn btn-outline" style="font-size:.92rem; padding:14px 28px;">
+          <i class="fa-solid fa-play"></i> Interaktive Demo ansehen — so sieht Ihr Dashboard aus
+        </a>
+      </div>
+
     </div>
   </section>
 
 
-  <!-- ── STEPS ─────────────────────────────────────────────── -->
+  <!-- ── HOW IT WORKS ──────────────────────────────────────── -->
   <section class="steps-section">
     <div class="container">
       <div class="section-eyebrow">So einfach geht's</div>
-      <h2 class="section-title">Drei Schritte bis zur Rückerstattung.</h2>
+      <h2 class="section-title">PDF weiterleiten. Fertig.</h2>
 
       <div class="steps-grid">
-        <!-- Connector line rendered as a real element, behind circles -->
         <div class="steps-connector"></div>
 
         <div class="step-item">
           <div class="step-num">1</div>
-          <div class="step-tag">Schritt 1</div>
-          <h3>Scannen &amp; Schwärzen</h3>
-          <p>Rechnung hochladen. Ihr Name und persönliche Daten werden lokal automatisch unkenntlich gemacht – bevor etwas unsere Server erreicht.</p>
-          <div class="step-pill">
-            <i class="fa-solid fa-shield-halved"></i>
-            Ende-zu-Ende verschlüsselt
-          </div>
+          <div class="step-tag">Einmalig</div>
+          <h3>WhatsApp-Nummer speichern</h3>
+          <p>Kein App-Download, keine Registrierung. Ihre Telefonnummer ist Ihre ID — das war's.</p>
+          <div class="step-pill"><i class="fa-brands fa-whatsapp"></i> 30 Sekunden Setup</div>
         </div>
 
         <div class="step-item">
           <div class="step-num">2</div>
-          <div class="step-tag">Schritt 2</div>
-          <h3>KI-Analyse in Sekunden</h3>
-          <p>Unsere Engine prüft sämtliche GoÄ-Ziffern gegen aktuelle Rechtsprechung und identifiziert unzulässige Kürzungen mit Quellenangabe.</p>
-          <div class="step-pill">
-            <i class="fa-solid fa-bolt"></i>
-            Ergebnis in &lt; 60 Sek.
-          </div>
+          <div class="step-tag">Jede Rechnung</div>
+          <h3>PDF aus dem Kassenportal weiterleiten</h3>
+          <p>AXA, Signal, Debeka — alle schicken PDFs ins Kundenportal. 2 Taps: herunterladen, an MediRight weiterleiten.</p>
+          <div class="step-pill"><i class="fa-solid fa-bolt"></i> 4 Taps total</div>
         </div>
 
         <div class="step-item">
           <div class="step-num">3</div>
-          <div class="step-tag">Schritt 3</div>
-          <h3>Geld zurück – kein Risiko</h3>
-          <p>Sie erhalten einen fertigen, rechtssicheren Widerspruch. Erst wenn Sie erfolgreich sind, berechnen wir eine Provision von 25&nbsp;%.</p>
-          <div class="step-pill">
-            <i class="fa-solid fa-circle-check"></i>
-            Nur Erfolgshonorar
-          </div>
+          <div class="step-tag">Sofort</div>
+          <h3>Analyse zurück in 60 Sekunden</h3>
+          <p>GOÄ-Ziffern, Faktoren, §&thinsp;12-Verstöße, Benchmark gegen Fachgruppe — alles aufbereitet per WhatsApp-Antwort.</p>
+          <div class="step-pill"><i class="fa-solid fa-circle-check"></i> Was anfechtbar ist</div>
         </div>
 
         <div class="step-item">
           <div class="step-num">4</div>
-          <div class="step-tag">Schritt 4</div>
-          <h3>Alles im Blick behalten</h3>
-          <p>Ihr persönliches Dashboard zeigt den Status jeder Rechnung – eingereicht, in Prüfung, erstattet. Kein Papierchaos, kein Nachfragen, volle Kontrolle auf einen Blick.</p>
-          <div class="step-pill">
-            <i class="fa-solid fa-chart-simple"></i>
-            Live-Statustracking
-          </div>
+          <div class="step-tag">Mit der Zeit</div>
+          <h3>Dashboard wächst automatisch</h3>
+          <p>Jede Rechnung baut Ihr persönliches Profil auf: Arzt-Vergleiche, Ablehnungsraten, Jahrestotals — alles ohne Mehraufwand.</p>
+          <div class="step-pill"><i class="fa-solid fa-chart-simple"></i> Kumuliert ohne Aufwand</div>
         </div>
 
       </div>
@@ -976,56 +975,45 @@
   </section>
 
 
-  <!-- ── GOÄ-REFORM URGENCY ─────────────────────────────────── -->
+  <!-- ── DASHBOARD FEATURES ────────────────────────────────── -->
   <section class="urgency-section">
     <div class="container">
       <div class="urgency-inner">
 
-        <!-- Left: Visual Stats Card -->
+        <!-- Left: Stats -->
         <div class="urgency-visual">
           <div class="urgency-stat">
-            <div class="stat-number">73&nbsp;%</div>
-            <div class="stat-label">aller gekürzten Rechnungen enthalten mindestens einen anfechtbaren GoÄ-Fehler.</div>
+            <div class="stat-number">83&nbsp;%</div>
+            <div class="stat-label">erstattet — während andere AXA-Kunden im Schnitt 89&nbsp;% erhalten. 6 Prozentpunkte, die niemand angesprochen hat.</div>
           </div>
           <div class="urgency-stat">
-            <div class="stat-number">Ø 340&nbsp;€</div>
-            <div class="stat-label">Rückerstattung pro erfolgreichem Widerspruch – bisher ungenutzt.</div>
+            <div class="stat-number">3,5×</div>
+            <div class="stat-label">Abrechnungsfaktor Ihres Internisten — Ø der Fachgruppe: 2,1×. Ohne §&thinsp;12-Begründung anfechtbar.</div>
           </div>
           <div class="urgency-stat">
-            <div class="stat-number">&lt; 5&nbsp;%</div>
-            <div class="stat-label">der Berechtigten legen jemals Widerspruch ein. Sie können das ändern.</div>
+            <div class="stat-number">€&thinsp;127</div>
+            <div class="stat-label">stille Kürzungen kumuliert — nie abgelehnt, einfach still weniger überwiesen. Erscheint in keiner Statistik.</div>
           </div>
           <div class="urgency-stat">
-            <div class="stat-number">~ 4.000&nbsp;€</div>
+            <div class="stat-number">~&thinsp;4.000&nbsp;€</div>
             <div class="stat-label">entgehen einem Durchschnittsversicherten über 10 Jahre, weil Widersprüche ausbleiben.</div>
           </div>
         </div>
 
-        <!-- Right: Copy -->
+        <!-- Right: Features -->
         <div>
           <div class="urgency-badge">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            Jetzt handeln
+            <i class="fa-solid fa-chart-line"></i>
+            Mehr als ein Widerspruch
           </div>
-          <h2 class="section-title">Bereit für die neue GOÄ? Wir schon.</h2>
-          <p class="urgency-text">Das Abrechnungssystem befindet sich im größten Umbruch seit Jahrzehnten. Die Fehlerquote steigt rasant. Nutzen Sie modernste KI, um auf Augenhöhe mit den Krankenkassen zu bleiben.</p>
+          <h2 class="section-title">Das vollständige Bild — nicht nur die einzelne Rechnung.</h2>
+          <p class="urgency-text">MediRight akkumuliert mit jeder Einreichung mehr Wissen über Ihre persönliche Situation. Nach 3–4 Rechnungen haben Sie Einblicke, die kein anderes Tool bieten kann.</p>
           <ul class="feature-list">
-            <li>
-              <i class="fa-solid fa-check"></i>
-              Automatischer Abgleich mit aktueller GOÄ-Novelle
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              Kontinuierliche Aktualisierung durch juristische Fachanwälte
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              Vollständig rechtssichere Widerspruchsschreiben
-            </li>
-            <li>
-              <i class="fa-solid fa-check"></i>
-              Spezialisiert auf Beihilfe, PKV und Doppelversicherungen
-            </li>
+            <li><i class="fa-solid fa-check"></i> Faktor-Entwicklung Ihres Arztes über alle Besuche — steigt er systematisch?</li>
+            <li><i class="fa-solid fa-check"></i> Unplausible Ziffernkombinationen: was selten zusammen abgerechnet wird</li>
+            <li><i class="fa-solid fa-check"></i> Ihre Ablehnungsrate im Trend — steigt sie? Bei welchen Arztgruppen?</li>
+            <li><i class="fa-solid fa-check"></i> Benchmark: Sie vs. andere Kunden Ihrer Versicherung</li>
+            <li><i class="fa-solid fa-check"></i> Neutrale Gesundheitschronik mit Vorsorge-Erinnerungen</li>
           </ul>
 
           <!-- Praxis-Beispiel -->
@@ -1036,9 +1024,9 @@
             <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:center; font-size:.88rem;">
               <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:var(--radius-sm); padding:14px 16px;">
                 <div style="font-size:.72rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Arztrechnung</div>
-                <div style="font-weight:600; color:var(--navy);">GOÄ Ziffer 5 – Faktor 3,5×</div>
-                <div style="color:var(--gray-600); font-size:.82rem; margin-top:4px;">Eingehende Beratung, 22 Min.</div>
-                <div style="font-weight:700; color:var(--navy); margin-top:8px;">148,20&nbsp;€</div>
+                <div style="font-weight:600; color:var(--navy);">GOÄ Nr. 3 – Faktor 3,5×</div>
+                <div style="color:var(--gray-600); font-size:.82rem; margin-top:4px;">Eingehende Untersuchung</div>
+                <div style="font-weight:700; color:var(--navy); margin-top:8px;">84,40&nbsp;€</div>
               </div>
               <div style="text-align:center;">
                 <i class="fa-solid fa-arrow-right" style="color:var(--mint); font-size:1rem;"></i>
@@ -1046,8 +1034,8 @@
               </div>
               <div style="background:var(--white); border:1.5px solid var(--mint-light); border-radius:var(--radius-sm); padding:14px 16px;">
                 <div style="font-size:.72rem; font-weight:600; color:var(--mint-dark); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">MediRight erkennt</div>
-                <div style="font-weight:600; color:var(--navy);">§ 12 GOÄ verletzt</div>
-                <div style="color:var(--gray-600); font-size:.82rem; margin-top:4px;">Kein Begründungsschreiben des Arztes vorhanden</div>
+                <div style="font-weight:600; color:var(--navy);">§&thinsp;12 GOÄ verletzt</div>
+                <div style="color:var(--gray-600); font-size:.82rem; margin-top:4px;">Kein Begründungsschreiben · 4. Besuch in Folge über 2,3×</div>
                 <div style="font-weight:700; color:var(--mint-dark); margin-top:8px;">+ 63,80&nbsp;€ zurück</div>
               </div>
             </div>
@@ -1059,17 +1047,17 @@
   </section>
 
 
-  <!-- ── FOOTER / CTA ──────────────────────────────────────── -->
+  <!-- ── CTA ───────────────────────────────────────────────── -->
   <section class="cta-section" id="cta">
     <div class="container">
       <div class="cta-inner">
 
         <div class="cta-badge">
-          <i class="fa-solid fa-fire"></i>
+          <i class="fa-brands fa-whatsapp"></i>
           Geschlossener Beta-Test
         </div>
 
-        <h2>Starten Sie jetzt unseren Beta-Test.</h2>
+        <h2>Ihre nächste Rechnung prüft sich von selbst.</h2>
 
         <div class="cta-spots">
           <span>Noch verfügbare Plätze:</span>
@@ -1083,12 +1071,18 @@
           <span><strong style="color:var(--mint)">61 von 100</strong> belegt</span>
         </div>
 
-        <p>Wir vergeben aktuell <strong style="color:rgba(255,255,255,.85)">100 Plätze</strong> für unseren geschlossenen Modelltest. Lassen Sie Ihre kompliziertesten Rechnungen kostenlos prüfen – ohne Risiko, ohne Vorleistung.</p>
+        <p>Tragen Sie Ihre E-Mail ein — wir schicken Ihnen die WhatsApp-Nummer und eine kurze Einführung. Erste Analyse kostenlos, kein Abo, kein Risiko.</p>
 
-        <a href="#" class="btn btn-footer">
-          <i class="fa-solid fa-rocket"></i>
-          Jetzt Beta-Zugang sichern
-        </a>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
+          <a href="#" class="btn btn-footer">
+            <i class="fa-brands fa-whatsapp"></i>
+            Jetzt Beta-Zugang sichern
+          </a>
+          <a href="demos.html" class="btn" style="background:rgba(255,255,255,.08); color:rgba(255,255,255,.8); padding:20px 32px; font-size:1rem; border-radius:100px; border:1.5px solid rgba(255,255,255,.15);">
+            <i class="fa-solid fa-play"></i>
+            Demo ansehen
+          </a>
+        </div>
 
         <div class="footer-links">
           <a href="#">Impressum</a>
